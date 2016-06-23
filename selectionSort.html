@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+var array = [9,8,7,6,5,4,3,2,1,0]
+
+function selectionSort(arr){
+    var count = 0;
+    for(var j = 0; j < array.length; j++){
+        var min = array[count];
+        for( var i = count; i < array.length; i++){
+            if(array[i] < min){
+                var indexOfMin = i;
+                min = array[i];
+            }
+            var temp = array[count];
+            array[count] = min;
+            array[indexOfMin] = temp;
+        }
+        count++;
+    }
+    console.log(array);
+}
+selectionSort(array);
+
+</script>
