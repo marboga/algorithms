@@ -9,53 +9,36 @@ function bST(root) {
 	this.root = root;
 
 	this.add = function(val) {
-		var newnode = Node(val)
 		var curr = this.root
 		//here i need to find where my new node shall go
-		console.log(curr)
-		while (curr) {
-			 if (val == curr.val) {
-				if (!curr.right) {
-					curr.right = newnode
-				} else if (curr.right.val > val) {
-					newnode.right = curr.right
-					curr.right = newnode
-					return true
-				} else {
-					curr = curr.right
-				}
-			}
-			if (val > curr.val) {
-				if (curr.right) {
-					if (curr.right.val < val) {
-						curr = curr.right
-						console.log('in if1')
-					} else {
-						console.log(curr.right.val, val, curr.val)
-					}
-				} else {
-					curr.right = newnode
-					return true
-				}
-				console.log('broke out1')
-			}
+		while (curr.left || curr.right) {
 			if (val < curr.val) {
-				if (curr.left){
-					if (curr.left.val > val) {
-						curr = curr.left
-						console.log('in if2')
-					} else {
-						console.log(curr.left.val, val, curr.val)
-					}
+				if (curr.left) {
+					curr = curr.left
+					// this.add(val, curr)
 				} else {
-					curr.left = newnode
-					return true
+					return curr.left = newnode
+
 				}
-				console.log('broke2')
+			} else { //val >= curr.val
+				if (curr.right) {
+					curr = curr.right
+					// this.add(val, curr)
+				} else {
+					return curr.right = newnode
+
+				}
 			}
 		}
-
-		return false
+		//here i put it
+		console.log(curr.val, "ending")
+		if (curr.val > val) {
+			curr.left = new Node(val)
+			return 'left'
+		} else {
+			curr.right = new Node(val)
+			return 'right'
+		}
 	}
 
 	this.isEmpty = function(){
@@ -72,19 +55,35 @@ function bST(root) {
 			if (curr.val == val) {
 				return true
 			} else if (curr.val > val) {
-				curr = curr.left
+				if (curr.left) {
+					curr = curr.left
+				} else {
+					return false
+				}
 			} else if (curr.val < val){
 				curr = curr.right
+			} else {
+				return false
 			}
 		}
-		if (curr.val == val) {
-			return true
-		} else {
-
-			return false
-		}
+		return false
 	}
 
+	this.min = function() {
+		var curr = this.root
+		while (curr.left) {
+			curr = curr.left
+		}
+		return curr.val
+	}
+
+	this.max = function() {
+		var curr = this.root
+		while (curr.right) {
+			curr = curr.right
+		}
+		return curr.val
+	}
 }
 
 var node1 = new Node(1)
@@ -104,6 +103,8 @@ node6.left = node5
 
 bst = new bST(node4)
 
-console.log("value returned ==", bst.add(9))
+console.log("value returned ==", bst.add(100))
 console.log(JSON.stringify(bst))
-console.log(bst.contains(9))
+console.log(bst.contains(10))
+console.log(bst.min())
+console.log(bst.max())
