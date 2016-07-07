@@ -18,25 +18,32 @@ function rFactorial(num) {
 // console.log(rFactorial(9))
 
 function sumOfSquares(upToNum, sum, arr, str, base) {
+	// start of method
+	// var startTime = new Date();
+	// startTime = startTime.getTime();
 	sum = sum || 0; arr = arr || []; str = str || ""; base = base || 1;
 	var square = base * base;
 	if (square > upToNum) {return}
 	else if (sum+square == upToNum) {
 		if (str) {
 			arr.push(str +" + "+ square);
-			newStr = str + " + " + square;
+			var newStr = str + " + " + square;
 		} else {
 			arr.push(square);
-			newStr = str + square;
+			var newStr = str + square;
 		}
 	} else {
 		sumOfSquares(upToNum, sum, arr, str, base+1)
 		sumOfSquares(upToNum, sum+square, arr, newStr, base+1)
 		return arr;
 	}
+	//end of method
+	// var endTime = new Date();
+	// var timeResults = endTime - startTime
+	// console.log("time taken to do request,", timeResults)
 }
-// console.log(sumOfSquares(100))
+console.log(sumOfSquares(1000))
 
-function bstSize(root) {
-
+function bstSize() {
+	return "see binarysearchtrees.js"
 }

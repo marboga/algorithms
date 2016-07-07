@@ -21,11 +21,11 @@ def oddEven(num):
 # oddEven(50)
 
 def stars(arr):
-	for idx in range(len(arr)):
-		if type(arr[idx]) is int:
-			print "*" * arr[idx]
-		elif type(arr[idx]) is str:
-			print arr[idx][0].lower() * len(arr[idx])
+	for num in range(len(arr)):
+		if type(arr[num]) is int:
+			print "*" * arr[num]
+		elif type(arr[num]) is str:
+			print arr[num][0].lower() * len(arr[num])
 
 array = [8,3,2,"welf", "MOJO", 3]
 # print stars(array)

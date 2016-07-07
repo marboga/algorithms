@@ -84,6 +84,20 @@ function bST(root) {
 		}
 		return curr.val
 	}
+
+	function internalSize(curr) {
+		if (!curr) {
+			return 0
+		} else {
+			return 1 + internalSize(curr.left) + internalSize(curr.right)
+		}
+	}
+	this.size = function() {
+		var root = this.root
+		return internalSize(root)
+
+	}
+
 }
 
 var node1 = new Node(1)
@@ -108,3 +122,4 @@ console.log(JSON.stringify(bst))
 console.log(bst.contains(10))
 console.log(bst.min())
 console.log(bst.max())
+console.log(bst.size())
