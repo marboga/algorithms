@@ -16,10 +16,27 @@ function selectionSort(arr) {
 	}
 	return arr
 }
-var array1 = [9,8,7,6,5,4,3,2,1,0]
+var array1 = [9,8,7,6,5,4,3,2,1]
 // console.log(selectionSort(array1))
 
 
 function insertionSort(arr) {
-	
+	for (var i = 1; i < arr.length; i++) {
+		console.log(arr)
+		var temp = arr[i];
+		var j = i
+		while (temp < arr[j - 1]) {
+			if (j < 1) {
+				arr[j] = temp
+			} else {
+				arr[j] = arr[j - 1] //shift right
+			}
+			j--
+		}
+		arr[j] = temp //put temp back in the array
+		// console.log(arr)
+	}
+	return arr
 }
+
+console.log(insertionSort(array1))

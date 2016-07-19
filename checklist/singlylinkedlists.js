@@ -58,7 +58,7 @@ function linkedList(head) {
 
 	this.isEmpty = function() {
 		if (!this.head) {
-			return "is empty"
+			return "is empty";
 		}
 	}
 
@@ -76,7 +76,7 @@ function linkedList(head) {
 		var curr = this.head;
 		while(curr.next) {
 			if (curr.val == val) {
-				return true
+				return true;
 			}
 			curr = curr.next;
 		}
@@ -100,11 +100,11 @@ function linkedList(head) {
 			var walker = this.head;
 			var runner = this.head.next;
 			while (walker.next) {
-				walker.visited = true
+				walker.visited = true;
 				if (runner.next.visited == true) {
-					console.log(runner.val)
+					console.log(runner.val);
 					runner.next = null;
-					return runner
+					return runner;
 				} else {
 					walker = walker.next;
 					runner = runner.next.next;
@@ -121,47 +121,76 @@ function linkedList(head) {
 			while (walker.next) {
 				if (walker.next == runner.next) {
 					console.log(walker.val, runner.val)
-					var flag = runner
-					walker = this.head
+					var flag = runner;
+					walker = this.head;
 					while (runner.next) {
 						if (runner.next === walker) {
-							runner.next = null
-							return runner.val
+							runner.next = null;
+							return runner.val;
 						}
 						if (runner.next === flag) {
-							walker = walker.next
+							walker = walker.next;
 						}
-						runner = runner.next
+						runner = runner.next;
 					}
 				} else {
-					walker = walker.next
-					runner = runner.next.next
+					walker = walker.next;
+					runner = runner.next.next;
 				}
 			}
 		}
-		return false
+		return false;
 	}
 
+	this.kthFromLast = function(k) {
+		if (k < 1) {return null;}
+		if (!this.head) {return null;}
+		var curr = this.head;
+		var follower = curr;
+		while (curr) {
+			if (k > 0) {
+				curr = curr.next;
+				k--;
+			} else if (k === 0) {
+				curr = curr.next;
+				follower = follower.next
+			}
+		}
+		if (k > 0) return null;
+		return follower;
+	}
+
+	this.reverse = function() {
+		var alreadyDone = null;
+		var current = this.head;
+		var yetToDo;
+		if (!current.next) {return current}
+		while (current.next) {
+			yetToDo = current.next;
+			current.next = alreadyDone;
+			alreadyDone = current;
+			current = yetToDo;
+		}
+		current.next = alreadyDone
+		this.head = current;
+		return this.head
+	}
+	//this.
 }
 
 var node1 = new SLNode(1)
-var node2 = new SLNode(2)
-var node3 = new SLNode(3)
-var node4 = new SLNode(4)
-var node5 = new SLNode(5)
-var node6 = new SLNode(6)
-var node7 = new SLNode(7)
-
-node1.next = node2
-node2.next = node3
-node3.next = node4
-node4.next = node5
-node5.next = node6
-node6.next = node7
-node7.next = node3
-
-
 list = new linkedList(node1)
-var result = list.breakLoop2()
+list.addBack(2)
+list.addBack(3)
+list.addBack(4)
+list.addBack(5)
+list.addBack(6)
+list.addBack(7)
+list.addBack(8)
+list.addBack(9)
+list.addBack(10)
+list.addBack(11)
+
+var result = list.reverse()
 
 console.log(JSON.stringify(result))

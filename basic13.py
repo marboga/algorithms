@@ -26,8 +26,11 @@ def stars(arr):
 			print "*" * arr[num]
 		elif type(arr[num]) is str:
 			print arr[num][0].lower() * len(arr[num])
+		else:
+			print "what kind of input are you giving me?"
 
 array = [8,3,2,"welf", "MOJO", 3]
+
 # print stars(array)
 
 students = [
@@ -42,7 +45,7 @@ def names(arr):
 	return
 
 array = [1,4,7,3,-4,8,2,19.0,-37]
-
+print array
 def oneTo255():
 	for num in range(0, 255):
 		print num + 1
