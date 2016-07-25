@@ -5,8 +5,8 @@ function SLNode(val) {
 	this.next = null;
 }
 
-function linkedList(head) {
-	this.head = head;
+function linkedList() {
+	this.head = null;
 // }
 // function listNode(list){
 	// this.head = list;
@@ -45,6 +45,20 @@ function linkedList(head) {
 	this.front = function() {
 		if (!this.head){return null}
 		return this.head.val;
+	}
+
+	this.len = function() {
+		if (this.head) {
+			var length = 1
+			var curr = this.head
+		} else {
+			return 0;
+		}
+		while (curr.next) {
+			curr = curr.next;
+			length ++;
+		}
+		return length;
 	}
 
 	this.back = function() {
@@ -175,11 +189,45 @@ function linkedList(head) {
 		this.head = current;
 		return this.head
 	}
-	//this.
+	this.minToFront = function() {
+		if (!this.head) { return null }
+		var min = this.head;
+		var curr = this.head;
+		while (curr.next) {
+			if (curr.next.val < min.val) {
+				min = curr.next;
+				var minPrev = curr;
+			}
+			curr = curr.next;
+		}
+		if (minPrev) {
+			minPrev.next = curr.next;
+			curr.next = this.head;
+			this.head = curr
+		}
+		return this.head
+	}
+	this.prependVal = function(value, before) {
+		var node = new SLNode(value)
+		if (!this.head) { this.head = node }
+		var curr = this.head
+		while (curr.next) {
+			if (curr.next.val == before) {
+				node.next = curr.next;
+				curr.next = node;
+				return this.head;
+			}
+			curr = curr.next
+		}
+		curr.next = node;
+		return this.head;
+	}
+
 }
 
 var node1 = new SLNode(1)
-list = new linkedList(node1)
+list = new linkedList()
+list.head = node1
 list.addBack(2)
 list.addBack(3)
 list.addBack(4)
@@ -190,7 +238,8 @@ list.addBack(8)
 list.addBack(9)
 list.addBack(10)
 list.addBack(11)
+list.addBack(12)
 
-var result = list.reverse()
+var result = list.prependVal(38,8)
 
 console.log(JSON.stringify(result))
