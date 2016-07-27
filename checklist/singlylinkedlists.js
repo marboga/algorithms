@@ -14,6 +14,7 @@ function linkedList() {
 	this.addFront = function(val) {
 		var node = new SLNode(val);
 		node.next = this.head;
+		this.head = node;
 		return node;
 	}
 
@@ -24,6 +25,11 @@ function linkedList() {
 		}
 		curr.next = new SLNode(val);
 		return this.head;
+	}
+
+	this.push = function(node) {
+		node.next = this.head;
+		this.head = node;
 	}
 
 	this.removeBack = function() {
@@ -222,7 +228,113 @@ function linkedList() {
 		curr.next = node;
 		return this.head;
 	}
+	this.splitOnVal = function(value) {
+		if (!this.head) { return null }
+		var curr = this.head
+		if (this.head.val == value) {
+			this.head = null;
+			return curr;
+		}
+		while (curr.next) {
+			if (curr.next.val == value) {
+				var rest = curr.next;
+				curr.next = null;
+				return rest;
+			}
+			curr = curr.next
+		}
+		return this.head;
+	}
 
+	this.popFront = function() {
+		var temp = this.head;
+		this.head = this.head.next;
+		temp.next = null;
+	}
+
+	// this.partition = function(value) {
+	// 	if (!this.head) { return null }
+	// 	var firstHalf = new linkedList();
+	// 	firstHalf.head = this.head
+	// 	var secondHalf = new linkedList();
+	// 	secondHalf.head = firstHalf.splitOnVal(
+	// 	console.log(secondHalf.head, "asrfalvbsfub")
+	// 	var thirdHalf = secondHalf.popFront();
+	// 	var firstCurr = firstHalf;
+	// 	var secondCurr = secondHalf;
+	// 	console.log("firstCURR",JSON.stringify(firstCurr))
+	// 	console.log("secondCURR", JSON.stringify(secondCurr))
+	// 	while (firstCurr.next) { //go through firsthalf
+	// 		if (firstCurr.next.val >= value) {
+	// 			var temp = firstCurr.next
+	// 			firstCurr.next.next = null;
+	// 			secondHalf.push(firstCurr.next);
+	// 			firstCurr.next = temp.next;
+	// 		}
+	// 		else if (firstCurr.next.val == value) {
+	// 			thirdHalf.push(firstCurr.next)
+	// 			firstCurr.next = firstcurr.next.next
+	// 		}
+	// 		firstCurr = firstCurr.next
+	// 	}
+	// 	while (secondCurr.next) {
+	// 		if (secondCurr.next.val < value) {
+	// 			var temp = secondCurr.next;
+	// 			secondCurr.next.next = null;
+	// 			firstHalf.push(secondCurr.next);
+	// 			secondCurr.next = temp.next;
+	// 		}
+	// 		else if (secondCurr.next.val == value) {
+	// 			thirdHalf.push(secondCurr.next)
+	// 			secondCurr.next = secondcurr.next.next
+	// 		}
+	// 		secondCurr = secondCurr.next
+	// 	}
+	// 	var thirdCurr = thirdHalf;
+	// 	while (firstCurr.next) {
+	// 		firstCurr = firstCurr.next;
+	// 	}
+	// 	console.log("SECONDHALF", secondHalf.head)
+	// 	firstCurr.next = firstHalf.head;
+	//
+	// 	this.head = firstHalf.head
+	// 	// while (thirdCurr.next) {
+	// 	// 	thirdCurr = thirdCurr.next;
+	// 	// }
+	// 	thirdCurr.next = secondCurr;
+	// 	return this.head;
+	// }
+
+	this.partition = function(value) {
+		var curr = this.head;
+		if (!curr.next) { return this.head }
+		// console.log("h1",half1, "\n","h2",half2)
+		var tooBig = new linkedList();
+		var tooSmall = new linkedList();
+		var tail;
+		while (curr.next) {
+			var temp = curr.next
+			curr.next = curr.next.next;
+			if (temp.val >= value) {
+				//remove node with larger value from list
+				tooBig.push(temp);
+			} else {
+				if (!tooSmall.head) { tail = temp }
+				tooSmall.push(temp);
+			}
+		}
+		if (curr.val > value) {
+			//remove node with larger value from list
+			tooBig.push(curr);
+		} else if (curr.val == value) {
+			justRight.push(curr);
+		} else {
+			tooSmall.push(curr);
+		}
+		this.head = tooSmall.head;
+		tail.next = tooBig.head;
+		return this.head;
+	}
 }
 
 var node1 = new SLNode(1)
@@ -236,10 +348,11 @@ list.addBack(6)
 list.addBack(7)
 list.addBack(8)
 list.addBack(9)
-list.addBack(10)
-list.addBack(11)
-list.addBack(12)
+list.addBack(0)
+list.addBack(1)
+list.addBack(2)
 
-var result = list.prependVal(38,8)
+var result = list.partition(5)
 
-console.log(JSON.stringify(result))
+console.log("RESULT", JSON.stringify(result))
+// console.log(JSON.stringify(list))
