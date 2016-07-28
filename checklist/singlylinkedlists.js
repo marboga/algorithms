@@ -335,7 +335,40 @@ function linkedList() {
 		tail.next = tooBig.head;
 		return this.head;
 	}
+
+	this.secondToLastVal = function() {
+		if (!this.head || !this.head.next || !this.head.next.next) {
+			return null;
+		}
+		var curr = this.head;
+		while(curr.next.next) {
+			curr = curr.next
+		}
+		return curr.val;
+	}
+
+	this.filter = function(headNode, lowVal, highVal) {
+		var curr = headNode;
+		var filtered = new linkedList()
+		if (headNode.val > highval || headNode.val < lowVal) {
+			headNode = headNode.next
+		}
+		while(curr.next) {
+			if (curr.next.val > highVal || curr.next.val < lowVal) {
+				curr.next = curr.next.next
+			}
+			curr = curr.next
+		}
+		return headNode;
+	}
 }
+// Second to Last Value
+// Create a standalone function that, given a pointer to the first node in a singly-linked list, will return the second-to-last value in that list. If the list isn't long enough, return null.
+// Filter
+// Given a headNode, lowVal and highVal, remove from the list any nodes that have values less than lowVal or higher than highVal. Return the new list.
+// Remove Single Node (Challenging!)
+// Create a function removeNode(node) that takes in a pointer to only a single node (i.e. you don't have a pointer to the list itself) and remove it.
+// Here's a hint: You could be provided any node in the list except the last node.
 
 var node1 = new SLNode(1)
 list = new linkedList()
@@ -352,7 +385,7 @@ list.addBack(0)
 list.addBack(1)
 list.addBack(2)
 
-var result = list.partition(5)
+var result = list.secondToLastVal()
 
 console.log("RESULT", JSON.stringify(result))
 // console.log(JSON.stringify(list))
