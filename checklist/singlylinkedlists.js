@@ -349,7 +349,6 @@ function linkedList() {
 
 	this.filter = function(headNode, lowVal, highVal) {
 		var curr = headNode;
-		var filtered = new linkedList()
 		if (headNode.val > highval || headNode.val < lowVal) {
 			headNode = headNode.next
 		}
@@ -360,6 +359,11 @@ function linkedList() {
 			curr = curr.next
 		}
 		return headNode;
+	}
+	this.removeNode = function(node) {
+		if node.next{
+			node = node.next
+		}
 	}
 }
 // Second to Last Value

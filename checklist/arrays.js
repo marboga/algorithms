@@ -22,6 +22,23 @@ function reverseArr(arr) {
 	}
 	return arr;
 }
+
+var arr = [1,2,3,4,5,6,7];
+
+
+var i = (arr.length - 1);
+var x = 0;
+
+for (var i = (arr.length -1); i > 0; i--){
+if(x < i)
+{
+   temp = arr[x];
+   arr[x] = arr[i];
+   arr[i] = temp;
+}
+x++;
+}
+console.log(arr);
 // console.log(reverseArr([1,2,3,4,5,6,7,8,9]))
 
 function removeNegatives(arr) {
@@ -36,4 +53,4 @@ function removeNegatives(arr) {
 	}
 	return arr
 }
-console.log(removeNegatives([1,-2,3,-4,5,6,7,8]))
+// console.log(removeNegatives([1,-2,3,-4,5,6,7,8]))

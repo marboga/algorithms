@@ -1,5 +1,7 @@
 //Sorting - Implement versions of the following sorts, for numerical arrays: SelectionSort, BubbleSort or InsertionSort
 
+
+
 function selectionSort(arr) {
 	var i = 0
 	while (i < arr.length) {
@@ -39,4 +41,15 @@ function insertionSort(arr) {
 	return arr
 }
 
-console.log(insertionSort(array1))
+// console.log(insertionSort(array1))
+
+function quickSort(arr) {
+	//break it down
+	if (arr.length == 1) {
+		return arr;
+	}
+
+	function partition(arr1) {
+
+	}
+}
