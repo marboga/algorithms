@@ -69,34 +69,53 @@ function swapPairs(arr) {
 //
 var sortedArr = [-20,-20,1,3,3,3,4,4,5,6,7,7,7,9]
 function deDupe(arr) {
-	var numberOfDuplicates = 0;
-	var index = 0;
-	while (index < arr.length) {
-		var nextUniqueIdx = index + 1
-		while (arr[index] === arr[nextUniqueIdx]) {
-			numberOfDuplicates++;
-			nextUniqueIdx++;
+	var dupes = 0;
+	var pointer1 = 0;
+	var pointer2 = 1;
+	while (pointer2 < arr.length) {
+		while (arr[pointer1] === arr[pointer2]) {
+			pointer2++;
+			dupes++;
 		}
-		console.log(arr[index], arr[nextUniqueIdx]);
-		index++;
-		if (nextUniqueIdx) {
-			arr[index] = arr[nextUniqueIdx]
-		} else {
-			console.log(index, arr, "noasfasf")
-		}
-		// console.log(index, "index")
+		pointer1++;
+		arr[pointer1] = arr[pointer1 + dupes];
+		pointer2++;
 	}
+	arr.length -= dupes;
 	return arr;
 }
-console.log(deDupe(sortedArr))
+// console.log(deDupe(sortedArr))
 
 // Reverse array
 // Given a numerical array, reverse the order of the values. The reversed array should have the same length, with existing elements moved to other indices so that the order of elements is reversed. Don’t use a second array – move the values around within the array that you are given.
 //
+function reverseArray(arr) {
+	for (var i = 0; i < Math.floor(arr.length / 2); i++) {
+		var fromEnd = arr.length - 1 - i;
+		var temp = arr[i];
+		arr[i] = arr[fromEnd];
+		arr[fromEnd] = temp;
+	}
+	return arr;
+}
+// console.log(reverseArray(array))
 
+var negArr = [-1,-4,-6,4,-300,-2]
 // Remove negatives
 // Implement removeNegatives() that accepts an array and removes any negative values from that array.
-
+function removeNegatives(arr) {
+	var negs = 0
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] < 0) {
+			negs++;
+		
+		}
+		arr[i] = arr[i + negs];
+	}
+	arr.length -= negs;
+	return arr;
+}
+console.log(removeNegatives(negArr))
 // Remove negatives
 // Implement removeNegatives() that accepts an array, removes negative values, and returns the same array (not a copy), preserving non-negatives’ order.
 // Additional: Don't use nested loops
