@@ -30,12 +30,16 @@ function removeNegatives(arr) {
 	var count = [];
 	for (var i = 0; i < arr.length; i++) {
 		if (arr[i] < 0) {
-			for (var j = i; j < arr.length; j++){
-				arr[j] = arr[j+1]
+			var j = i + 1;
+			while (j < arr.length) {
+				if (arr[j] < 0) {
+					j++
+					count++
+				}
 			}
-			arr.length -= 1;
+			arr[i] = arr[j];
 		}
 	}
 	return arr
 }
-// console.log(removeNegatives([1,-2,3,-4,5,6,7,8]))
+console.log(removeNegatives([-1,-2,3,-4,5,6,7,8,-12]))
