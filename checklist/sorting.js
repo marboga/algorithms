@@ -43,13 +43,43 @@ function insertionSort(arr) {
 
 // console.log(insertionSort(array1))
 
-function quickSort(arr) {
-	//break it down
-	if (arr.length == 1) {
+function merge(arr1, arr2) {
+	var index1 = 0, index2 = 0;
+	var resultArr = [];
+	while(index1 < arr1.length && index2 < arr2.length) {
+		if (arr1[index1] < arr2[index2]) {
+			resultArr.push(arr1[index1]);
+			index1++;
+		} else {
+			resultArr.push(arr2[index2]);
+			index2++;
+		}
+	}
+	// console.log(arr1, arr2, resultArr);
+	if (index1 === arr1.length) {
+		for (var i = index2; i < arr2.length; i++) {
+			resultArr.push(arr2[i]);
+		}
+	} else {
+		for (var i = index1; i < arr1.length; i++) {
+			resultArr.push(arr1[i]);
+		}
+	}
+	// console.log(arr1, arr2, resultArr);
+	return resultArr;
+}
+
+// var firstArr = [1,3,5,6,9]
+// var secondArr = [2,4,7,8]
+// console.log(merge(secondArr, firstArr))
+
+function mergeSort(arr) {
+	if (arr.length === 1) {
 		return arr;
 	}
-
-	function partition(arr1) {
-
-	}
+	var left = mergeSort(arr.slice(0,Math.floor(arr.length/2)))
+	var right = mergeSort(arr.slice(Math.floor(arr.length/2)));
+	console.log("left", left, "right", right)
+	return merge(left, right)
 }
+console.log(mergeSort([9,8,7,6,5,4,3,2,1]))

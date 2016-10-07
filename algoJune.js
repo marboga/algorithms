@@ -17,13 +17,16 @@ function rCombi(str, arr) {
 	return rCombi(str, arr);
 }
 
-var string = "ABCD";
+var string = "ABCDEFGhi";
 // console.log(rCombi(string), "this is result");
 
 function rPermutations(str, substr, arr){
 	arr = arr || [];
 	substr = substr || "";
-	if (!str.length){arr.push(substr); return arr;}
+	if (!str.length){
+		arr.push(substr);
+		return arr;
+	}
 	// console.log(str, "str", arr)
 	for (var i = 0, len = str.length ; i < len; i++){
 		// console.log(i, str)
@@ -33,7 +36,8 @@ function rPermutations(str, substr, arr){
 	}
 	return arr;
 }
-// console.log(rPermutations(string));
+console.log(rPermutations(string));
+
 
 function rInOrderSubstrings(str, arr, substr) {
 	arr = arr || [];
@@ -51,13 +55,4 @@ function rInOrderSubstrings(str, arr, substr) {
 	}
 	return arr;
 }
-rInOrderSubstrings("abc");
-
-
-
-
-
-
-
-
-
+// rInOrderSubstrings("abc");
